@@ -3,7 +3,7 @@ import {IconButton} from "@material-ui/core";
 import {AddBox} from "@material-ui/icons";
 import TextField from "@material-ui/core/TextField";
 
-type AddItemFormPropsType = {
+export type AddItemFormPropsType = {
     addItem:(title:string) => void
 }
 

@@ -1,10 +1,9 @@
 import React, {ChangeEvent, useState} from "react";
 import TextField from "@material-ui/core/TextField";
 
-type EditableSpanPropsType = {
+export type EditableSpanPropsType = {
     value: string
     changeValue: (value: string) => void
-
 }
 
 export const EditableSpan = React.memo((props: EditableSpanPropsType) => {
