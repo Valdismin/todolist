@@ -1,7 +1,6 @@
 import { Dispatch } from 'redux'
 import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType, setIsInitializedAC} from '../../app/app-reducer'
 import {authAPI, dataType, todolistsAPI} from "../../api/todolists-api";
-import {addTodolistAC} from "../TodolistsList/todolists-reducer";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
 
 const initialState = {
