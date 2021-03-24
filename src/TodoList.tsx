@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useCallback} from "react";
-import {FilterValuesType, TaskType} from "./App";
+import {FilterValuesType, TaskType} from "./AppWithRedux";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import {Checkbox, IconButton} from "@material-ui/core";
@@ -22,8 +22,6 @@ export type PropsType = {
 }
 
 export const TodoList = React.memo((props: PropsType) => {
-    console.log("asmdkmas;dmsad")
-
 
     const AddTask = useCallback((title: string) => {
         props.addTask(title, props.id)
