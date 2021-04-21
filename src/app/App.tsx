@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppRootStateType} from './store'
 import {RequestStatusType} from './app-reducer'
 import {Login} from "../features/Login/Login";
-import {Redirect, Route, Switch } from 'react-router-dom'
+import {Redirect, Route, Switch} from 'react-router-dom'
 import {initializeAppTC, logoutTC} from "../features/Login/auth-reducer";
 import CircularProgress from '@material-ui/core/CircularProgress'
 
@@ -19,11 +19,11 @@ type PropsType = {
 function App({demo = false}: PropsType) {
     const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
     const isInitialized = useSelector<AppRootStateType>((state) => state.app.isInitialized)
-    const isLoggedIn= useSelector<AppRootStateType>(state => state.auth.isLoggedIn)
+    const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isLoggedIn)
     const dispatch = useDispatch()
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(initializeAppTC())
-    },[])
+    }, [])
 
     if (!isInitialized) {
         return <div
@@ -38,7 +38,7 @@ function App({demo = false}: PropsType) {
 
     return (
         <div className="App">
-            <ErrorSnackbar />
+            <ErrorSnackbar/>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" color="inherit" aria-label="menu">
@@ -51,13 +51,13 @@ function App({demo = false}: PropsType) {
                     {isLoggedIn && <Button onClick={logOut} color='inherit'>Log Out</Button>}
                 </Toolbar>
             </AppBar>
-            { status === 'loading' &&  <LinearProgress /> }
+            {status === 'loading' && <LinearProgress/>}
             <Container fixed>
                 <Switch>
-                <Route exact path={'/'} render={() => <TodolistsList demo={demo}/>}/>
-                <Route path={'/login'} render={() => <Login />}/>
-                <Route path={ '/404' } render={ () => <h1>404: PAGE NOT FOUND</h1> }/>
-                <Redirect from={"*"} to={"/404"}/>
+                    <Route exact path={'/'} render={() => <TodolistsList demo={demo}/>}/>
+                    <Route path={'/login'} render={() => <Login/>}/>
+                    <Route path={'/404'} render={() => <h1>404: PAGE NOT FOUND</h1>}/>
+                    <Redirect from={"*"} to={"/404"}/>
                 </Switch>
             </Container>
         </div>
