@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useCallback, useEffect} from 'react'
 import './App.css'
 import {AppBar, Button, Container, IconButton, LinearProgress, Toolbar, Typography} from '@material-ui/core'
 import {Menu} from '@material-ui/icons'
@@ -9,8 +9,9 @@ import {AppRootStateType} from './store'
 import {RequestStatusType} from './app-reducer'
 import {Login} from "../features/Login/Login";
 import {Redirect, Route, Switch} from 'react-router-dom'
-import {initializeAppTC, logoutTC} from "../features/Login/auth-reducer";
+import {initializeAppTC} from "./app-reducer";
 import CircularProgress from '@material-ui/core/CircularProgress'
+import {logoutTC} from "../features/Login/auth-reducer";
 
 type PropsType = {
     demo?: boolean
@@ -32,7 +33,7 @@ function App({demo = false}: PropsType) {
         </div>
     }
 
-    const logOut = () => {
+    const logoutHandler = () => {
         dispatch(logoutTC())
     }
 
@@ -47,14 +48,16 @@ function App({demo = false}: PropsType) {
                     <Typography variant="h6">
                         News
                     </Typography>
-                    <Button color="inherit">Login</Button>
-                    {isLoggedIn && <Button onClick={logOut} color='inherit'>Log Out</Button>}
+
+                    {isLoggedIn ?
+                        <Button onClick={logoutHandler} color='inherit'>Log Out</Button>
+                        : <Button color="inherit">Login</Button>}
                 </Toolbar>
             </AppBar>
             {status === 'loading' && <LinearProgress/>}
             <Container fixed>
                 <Switch>
-                    <Route exact path={'/'} render={() => <TodolistsList demo={demo}/>}/>
+                    <Route exact path={'/'} render={() => <TodolistsList/>}/>
                     <Route path={'/login'} render={() => <Login/>}/>
                     <Route path={'/404'} render={() => <h1>404: PAGE NOT FOUND</h1>}/>
                     <Redirect from={"*"} to={"/404"}/>
